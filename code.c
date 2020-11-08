@@ -47,20 +47,20 @@ int main()
 
         if (destinationTileFrom[ tileAfterDiceRoll ] > tileAfterDiceRoll)
         {
-            printf("Player %u landed on %u BUT took a ladder to %u\n", currentPlayerIndex, tileAfterDiceRoll, destinationTileFrom[ tileAfterDiceRoll ]);
+            printf("Player %u landed on %u BUT took a ladder to %u\n", currentPlayerIndex + 1, tileAfterDiceRoll, destinationTileFrom[ tileAfterDiceRoll ]);
         }
-        else if (destinationTileFrom[tileAfterDiceRoll] < tileAfterDiceRoll)
+        else if (destinationTileFrom[ tileAfterDiceRoll ] < tileAfterDiceRoll)
         {
-            printf("Player %u landed on %u BUT took a snake to %u\n", currentPlayerIndex, tileAfterDiceRoll, destinationTileFrom[ tileAfterDiceRoll ]);
+            printf("Player %u landed on %u BUT took a snake to %u\n", currentPlayerIndex + 1, tileAfterDiceRoll, destinationTileFrom[ tileAfterDiceRoll ]);
         }
-        else if (destinationTileFrom[tileAfterDiceRoll] == 100)
+        else if (destinationTileFrom[ tileAfterDiceRoll ] == 100)
         {
-            printf("Player %u WON !!!!!", currentPlayerIndex);
+            printf("Player %u WON !!!!!", currentPlayerIndex + 1);
             return 0;
         }
         else
         {
-            printf("Player %u landed %u\n", currentPlayerIndex, destinationTileFrom[ tileAfterDiceRoll ]);
+            printf("Player %u landed %u\n", currentPlayerIndex + 1, destinationTileFrom[ tileAfterDiceRoll ]);
         }
         
         currentPlayerIndex = (currentPlayerIndex + 1) % PLAYER_COUNT;
