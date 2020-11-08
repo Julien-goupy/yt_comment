@@ -8,14 +8,14 @@ int main()
 {
     // Variables
     int destinationTileFrom[101];
-    int playerPositions[PLAYER_COUNT];
-    int currentPlayerIndex;
+    int tileOf[PLAYER_COUNT];
+    int currentPlayer;
 
 
     // init
-    for (int i=0; i < 101; ++i)
+    for (int tile_i=0; tile_i < 101; ++tile_i)
     {
-        destinationTileFrom[i] = i;
+        destinationTileFrom[ tile_i ] = tile_i;
     }
 
     // init - ladders 
@@ -28,41 +28,48 @@ int main()
     ...
 
 
-    for (int i=0; i < PLAYER_COUNT; ++i)
+    for (int player_i=0; player_i < PLAYER_COUNT; ++player_i)
     {
-        playerPositions[i] = 0;
+        tileOf[ player_i ] = 0;
     }
 
-    currentPlayerIndex = 0;
+    currentPlayer = 0;
 
 
     // Game Loop
     while (true)
     {
         int diceRoll = random_int(1, 6);
-        printf("Player %d rolled a %d while being on case %d\n", currentPlayerIndex + 1, diceRoll, playerPositions[ currentPlayerIndex ]);
+        printf("Player %d rolled a %d while being on case %d\n", currentPlayer + 1, diceRoll, tileOf[ currentPlayer ]);
 
-        int tileAfterDiceRoll = playerPositions[ currentPlayerIndex ] + diceRoll;
-        playerPositions[ currentPlayerIndex ] = destinationTileFrom[ tileAfterDiceRoll ];
+        int tileAfterDiceRoll = tileOf[ currentPlayer ] + diceRoll;
+
+        if (tileAfterDiceRoll > 100)
+        {
+            tileAfterDiceRoll = 100 - (tileAfterDiceRoll - 100);
+            printf("Oups, you got too far...");
+        }
+
+        tileOf[ currentPlayer ] = destinationTileFrom[ tileAfterDiceRoll ];
 
         if (destinationTileFrom[ tileAfterDiceRoll ] > tileAfterDiceRoll)
         {
-            printf("Player %d landed on %d BUT took a ladder to %d\n", currentPlayerIndex + 1, tileAfterDiceRoll, destinationTileFrom[ tileAfterDiceRoll ]);
+            printf("Player %d landed on %d BUT took a ladder to %d\n", currentPlayer + 1, tileAfterDiceRoll, tileOf[ currentPlayer ]);
         }
         else if (destinationTileFrom[ tileAfterDiceRoll ] < tileAfterDiceRoll)
         {
-            printf("Player %d landed on %d BUT took a snake to %d\n", currentPlayerIndex + 1, tileAfterDiceRoll, destinationTileFrom[ tileAfterDiceRoll ]);
+            printf("Player %d landed on %d BUT took a snake to %d\n", currentPlayer + 1, tileAfterDiceRoll, tileOf[ currentPlayer ]);
         }
-        else if (destinationTileFrom[ tileAfterDiceRoll ] == 100)
+        else if (tileOf[ currentPlayer ] == 100)
         {
-            printf("Player %d WON !!!!!", currentPlayerIndex + 1);
+            printf("Player %d WON !!!!!", currentPlayer + 1);
             return 0;
         }
         else
         {
-            printf("Player %d landed %u\n", currentPlayerIndex + 1, destinationTileFrom[ tileAfterDiceRoll ]);
+            printf("Player %d landed %u\n", currentPlayer + 1, tileOf[ currentPlayer ]);
         }
         
-        currentPlayerIndex = (currentPlayerIndex + 1) % PLAYER_COUNT;
+        currentPlayer = (currentPlayer + 1) % PLAYER_COUNT;
     }
 }
