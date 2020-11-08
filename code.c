@@ -43,24 +43,24 @@ int main()
         printf("Player %u rolled a %u while being on case %u\n", currentPlayerIndex + 1, diceRoll, playerPositions[ currentPlayerIndex ]);
 
         uint32_t tileAfterDiceRoll = playerPositions[ currentPlayerIndex ] + diceRoll;
-        playerPositions[ currentPlayerIndex ] = destinationTileFrom[tileAfterDiceRoll];
+        playerPositions[ currentPlayerIndex ] = destinationTileFrom[ tileAfterDiceRoll ];
 
-        if (destinationTileFrom[tileAfterDiceRoll] > tileAfterDiceRoll)
+        if (destinationTileFrom[ tileAfterDiceRoll ] > tileAfterDiceRoll)
         {
-            printf("Player %u landed on %u BUT took a ladder to %u\n", currentPlayerIndex, tileAfterDiceRoll, destinationTileFrom[tileAfterDiceRoll]);
+            printf("Player %u landed on %u BUT took a ladder to %u\n", currentPlayerIndex, tileAfterDiceRoll, destinationTileFrom[ tileAfterDiceRoll ]);
         }
         else if (destinationTileFrom[tileAfterDiceRoll] < tileAfterDiceRoll)
         {
-            printf("Player %u landed on %u BUT took a snake to %u\n", currentPlayerIndex, tileAfterDiceRoll, destinationTileFrom[tileAfterDiceRoll]);
+            printf("Player %u landed on %u BUT took a snake to %u\n", currentPlayerIndex, tileAfterDiceRoll, destinationTileFrom[ tileAfterDiceRoll ]);
         }
         else if (destinationTileFrom[tileAfterDiceRoll] == 100)
         {
-            puts("Player %u WON !!!!!", currentPlayerIndex);
+            printf("Player %u WON !!!!!", currentPlayerIndex);
             return 0;
         }
         else
         {
-            printf("Player %u landed %u\n", currentPlayerIndex, destinationTileFrom[tileAfterDiceRoll]);
+            printf("Player %u landed %u\n", currentPlayerIndex, destinationTileFrom[ tileAfterDiceRoll ]);
         }
         
         currentPlayerIndex = (currentPlayerIndex + 1) % PLAYER_COUNT;
